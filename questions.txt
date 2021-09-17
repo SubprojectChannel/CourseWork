@@ -1,0 +1,4 @@
+Do I want to turn Neural Network into a library? If I have time
+Should I do the training on the arduino? 
+Do I want a class for higher order functions if I only use it twice? Yes, leave it as a class
+Do I want to do make the magic stick or implement the neural network in another way (for example https://www.youtube.com/watch?v=6raRftH9yxM)?
