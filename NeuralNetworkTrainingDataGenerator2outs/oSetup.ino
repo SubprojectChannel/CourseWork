@@ -6,10 +6,6 @@ void setup() {
   freeMemory();
 
   pinMode(buttonPin, INPUT_PULLUP);
-  pinMode(RED, OUTPUT);
-  pinMode(BLUE, OUTPUT);
-  pinMode(GREEN, OUTPUT);
-  pinMode(LED_PWR, OUTPUT);
   
   //neural stuff
   randomSeed(analogRead(0));
@@ -18,9 +14,5 @@ void setup() {
 
   IMUdata.Fill(0.5);
 
-   //brain.saveNetworkToSD();
-
-   brain.prepareForTraining(1, 560);
-   int samples[] = {0};
-   brain.loadTrainingSamples(samples);
+  //brain.saveNetworkToSD();
 }

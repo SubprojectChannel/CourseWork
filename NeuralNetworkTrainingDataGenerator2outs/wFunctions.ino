@@ -46,24 +46,3 @@ void saveTrainingDataToSD(String mySDFileName, float desiredOutput[], int desire
   }
   mySDFile.close();
 }
-
-void LEDsStuff(int outputIndex) {
-    if(outputIndex == 0) {
-      setLEDs(0, 0, 0, 1);
-    }
-    else {
-      int i = outputIndex;
-      setLEDs(i%2, (i/2)%2, (i/4)%2, 0);
-    }
-}
-
-void setLEDs(int r, int g, int b) {
-  setLEDs(r, g, b, 0);
-}
-
-void setLEDs(int r, int g, int b, int p) {
-  digitalWrite(RED, 1-r);
-  digitalWrite(GREEN, 1-g);
-  digitalWrite(BLUE, 1-b);
-  digitalWrite(LED_PWR, p);
-}

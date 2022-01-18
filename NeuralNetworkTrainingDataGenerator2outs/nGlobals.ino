@@ -35,7 +35,7 @@ float outputs[][2] = {
 //int myNN[] = {sizeof(inputs[0]) / sizeof(inputs[0][0]), 6, sizeof(outputs[0]) / sizeof(outputs[0][0])};
 //NeuralNetwork brain(myNN, sizeof(myNN) / sizeof(myNN[0]));
 
-int myNN[] = {400, 20, 30, 8};
+int myNN[] = {400, 2};
 NeuralNetwork brain(myNN, sizeof(myNN) / sizeof(myNN[0]));
 
 Matrix inputsM(sizeof(inputs) / sizeof(inputs[0]), sizeof(inputs[0]) / sizeof(inputs[0][0]), "inputsM");
@@ -44,8 +44,3 @@ Matrix outputsM(sizeof(outputs) / sizeof(outputs[0]), sizeof(outputs[0]) / sizeo
 Queue IMUdata(myNN[0]);
 
 int buttonPin = 4;
-
-#define RED 22     
- #define BLUE 24     
- #define GREEN 23
- #define LED_PWR 25

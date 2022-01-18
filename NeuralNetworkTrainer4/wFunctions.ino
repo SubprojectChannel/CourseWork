@@ -1,4 +1,5 @@
-void freeMemory() {
+
+void memoryInfo() {
   // allocate enough room for every thread's stack statistics
   int cnt = osThreadGetCount();
   mbed_stats_stack_t *stats = (mbed_stats_stack_t*) malloc(cnt * sizeof(mbed_stats_stack_t));
@@ -13,6 +14,25 @@ void freeMemory() {
   mbed_stats_heap_t heap_stats;
   mbed_stats_heap_get(&heap_stats);
   Serial.println("Heap size: " + String( heap_stats.current_size ) + " / " + String( heap_stats.reserved_size ));
+}
+
+
+int freeMemory() {
+  // allocate enough room for every thread's stack statistics
+  int cnt = osThreadGetCount();
+  mbed_stats_stack_t *stats = (mbed_stats_stack_t*) malloc(cnt * sizeof(mbed_stats_stack_t));
+
+  cnt = mbed_stats_stack_get_each(stats, cnt);
+  for (int i = 0; i < cnt; i++) {
+    //printf("Thread: 0x%lX, Stack size: %lu / %lu\r\n", stats[i].thread_id, stats[i].max_size, stats[i].reserved_size);
+  }
+  free(stats);
+
+  // Grab the heap statistics
+  mbed_stats_heap_t heap_stats;
+  mbed_stats_heap_get(&heap_stats);
+ // Serial.println("Heap size: " + String( heap_stats.current_size ) + " / " + String( heap_stats.reserved_size ));
+  return heap_stats.reserved_size - heap_stats.current_size;
 }
 
 float myMax(float a, float b) {
@@ -46,15 +66,30 @@ void saveTrainingDataToSD(String mySDFileName, float desiredOutput[], int desire
   }
   mySDFile.close();
 }
-
-void LEDsStuff(int outputIndex) {
-    if(outputIndex == 0) {
+/*
+void LEDsStuff(int i) {
+  if(millis() - timeOfLastSave < 200) {
+    if(i == 0) {
       setLEDs(0, 0, 0, 1);
     }
     else {
-      int i = outputIndex;
       setLEDs(i%2, (i/2)%2, (i/4)%2, 0);
     }
+  }
+  else setLEDs(0, 0, 0, 0);
+}
+*/
+void LEDsON(int i) {
+    if(i == 0) {
+      setLEDs(0, 0, 0, 1);
+    }
+    else {
+      setLEDs(i%2, (i/2)%2, (i/4)%2, 0);
+    }
+}
+
+void LEDsOFF() {
+  setLEDs(0, 0, 0, 0);
 }
 
 void setLEDs(int r, int g, int b) {
